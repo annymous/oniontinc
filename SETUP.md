@@ -4,7 +4,7 @@ These instructions and scripts are for Debian stretch x64. I've verified them fo
 
 Upgrade your system, and install needed and useful software.
 
-```
+```bash
 # apt-get update
 # apt-get -y dist-upgrade
 # reboot
