@@ -23,7 +23,7 @@ Upgrade your system, and install needed and useful software.
 # reboot
 ...
 # uname -r
-
+```
 If you don't see "4.14.110.mptcp", the MPTCP kernel didn't get installed. And it's needed for this setup to work properly. Once that succeeds, specify the fq (fair queuing) scheduler, which seems to work best for MPTCP. Also disable multipath for eth0 (or whatever it's named on your system) and disable systemd management of Tor (because it seems to work better just using command line).
 
 ```bash
@@ -32,12 +32,12 @@ If you don't see "4.14.110.mptcp", the MPTCP kernel didn't get installed. And it
 # ip link set dev eth0 multipath off
 # systemctl stop tor
 # systemctl disable tor
-
+```
 Clone or download stuff. Then add your host(s) to the information table. You can include all of the hosts in your planned network. The hostname serves as an index. So you can run the same scripts in all of the hosts, and they will be configured to connect with each other.
 
 ```bash
 # nano ~/host-information.txt
-
+```
 The columns:
 
 | Column   | Value                                                                    |
@@ -63,13 +63,13 @@ Create Tor instances, review the torrc files, and start them.
 ...
 # cat /etc/tor/torrc5
 # ~/start-tor-instances.sh
-
+```
 Get tinc onion hostnames, and add them to the host information table.
 
 ```bash
 # ~/get-tinc-onion-hostnames.sh
 # nano ~/host-information.txt
-
+```
 Create tinc config files, and review them.
 
 ```bash
@@ -77,7 +77,7 @@ Create tinc config files, and review them.
 # cat /etc/tinc/tinc0/tinc.conf
 ...
 # cat /etc/tinc/tinc5/tinc.conf
-
+```
 Create tinc keys, add necessary lines to host files, and review them.
 
 ```bash
@@ -86,7 +86,7 @@ Create tinc keys, add necessary lines to host files, and review them.
 # cat /etc/tinc/tinc0/hosts/yh0 [placeholder]
 ...
 # cat /etc/tinc/tinc5/hosts/yh5 [placeholder]
-
+```
 Create tinc-up and tinc-down scripts, review them, and update nets.boot.
 
 ```bash
@@ -99,14 +99,14 @@ Create tinc-up and tinc-down scripts, review them, and update nets.boot.
 ...
 # cat /etc/tinc/tinc5/tinc-down
 # ~/update-nets-boot.sh
-
+```
 Collect host files.
 
 ```bash
 # mkdir /tmp/hosts && cp /etc/tinc/tinc*/hosts/yh* /tmp/hosts/
 # cd /tmp/hosts
 # tar -cf yh-hosts.tar yh*
-
+```
 Copy "yh-hosts.tar" to /tmp/hosts/ in other hosts that you want to include. If you're adding a new host to an existing network, you must update the other "tinc.conf" files with "ConnectTo" lines for the new one. If you want to peer with my host "one", send your hosts archive to <annobrown@protonmail.com>, and copy my [one-hosts.tar](./one-hosts.tar) to /tmp/hosts/ in your host.
 
 ```bash
@@ -121,23 +121,24 @@ Copy "yh-hosts.tar" to /tmp/hosts/ in other hosts that you want to include. If y
 # cp one* /etc/tinc/tinc5/hosts/
 # rm one*
 # cd ~/
-
+```
 Start tinc instances, and set multipath on for them, and off for eth0 (or equivalent).
 
 ```bash
 # ~/start-tinc-instances.sh
 # ~/set-multipath.sh
-
+```
 If you need to stop tinc instances:
 
-   # ~/stop-tinc-instances.sh
-
+```bash
+# ~/stop-tinc-instances.sh
+```
 Update iptables rules.
 
 ```bash
 # cp ~/tinc-rules.v4 /etc/iptables/
 # iptables-restore &#60; /etc/iptables/tinc-rules.v4
-
+```
 The IPv6 rules drop everything. The IPv4 rules allow ssh login via all interfaces, but allow icmp, iperf3, and http/https traffic only via tinc interfaces. They allow outgoing traffic via eth0 (or equivalent) only for tor. That is, they allow tinc traffic only via tor. They allow all outgoing traffic via tinc interfaces, but no other outgoing traffic via eth0 or equivalent. And they do not allow any other unrelated/unestablished incoming traffic. You may need to change "eth0" to whatever your system uses. Once you're satisfied that these rules work, and don't lock you out, you can rename them to rules.v6 and rules.v4, respectively. That way, they will load at boot.
 
 Test connectivity.
@@ -148,7 +149,7 @@ Test connectivity.
 # ping -fc 10 10.101.10.3
 # ping -fc 10 10.101.10.6
 # ping -fc 10 10.101.10.7
-
+```
 Those should all succeed, with rtt on the order of 300-800 msec.
 
 ```bash
@@ -156,7 +157,7 @@ Those should all succeed, with rtt on the order of 300-800 msec.
 # ping -fc 10 10.101.20.10
 # ping -fc 10 1.1.1.1
 # ping -fc 10 194.36.190.113
-
+```
 But these should fail, with 100% packet loss. The addresses of "gateway6" are 194.36.190.113/32, 10.101.10.6/32 and 10.101.20.6/32. So only 10.101.10.6/32 should be reachable from 10.101.10.0/24. Using 10.101.20.6/32 as gateway, you can reach both 10.101.10.0/24 and 10.101.20.0/24.
 
 You can also test bandwidth using iperf3.
@@ -166,7 +167,7 @@ You can also test bandwidth using iperf3.
 # iperf3 -P 2 -c 10.101.10.1
 # iperf3 -P 5 -c 10.101.10.1
 # iperf3 -P 10 -c 10.101.10.1
-
+```
 Once you're satisfied that the setup is working, you can have the tor and tinc instances start at boot. The simplest way is adding the scripts to /etc/rc.local (after, if necessary, creating it):
 
 ```bash
@@ -176,3 +177,4 @@ Once you're satisfied that the setup is working, you can have the tor and tinc i
   /root/start-tinc-instances.sh
   exit 0
 # chmod a+x /etc/rc.local
+```
