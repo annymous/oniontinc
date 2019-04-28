@@ -1,0 +1,13 @@
+HOSTNAME|HOSTIP|TINC|TINCHOST|SUBNET|TOR|TORRC|SOCKSPORT|TINCPORT|TINCONION
+one|1|tinc0|one0|10|tor0|torrc0|9050|6550|y7inx7t56r5nt7meavd5detk4474a743x4cughklttcfp2f23il5psid.onion
+one|1|tinc1|one1|11|tor1|torrc1|9051|6551|rztqipljbso6wm7e4cnehdrtkkra4zosdl55dthhglemvucebc4ak5yd.onion
+one|1|tinc2|one2|12|tor2|torrc2|9052|6552|folt344bq66lpl5apnh3yynacfmiw2cpusmeopidfdrasdwabn2kvzad.onion
+one|1|tinc3|one3|13|tor3|torrc3|9053|6553|x4f4kp3kcmm4epzmdbck2ocqdzltyzcht7sf3m6cfjp6cpw3lsqn5pyd.onion
+one|1|tinc4|one4|14|tor4|torrc4|9054|6554|7wtt4xc5gdigp37peosqgg5nuutbtrfyelxqt66rn4lyp4mscvhclfqd.onion
+one|1|tinc5|one5|15|tor5|torrc5|9055|6555|fryq6ckbplyl4ytl6tciuqa4uvcnon4kjvo5nuqhmccvfvh4hiuwfjid.onion
+[your host]|[>30]|tinc0|[your host]0|10|tor0|torrc0|9050|6550|
+[your host]|[>30]|tinc1|[your host]1|11|tor1|torrc1|9051|6551|
+[your host]|[>30]|tinc2|[your host]2|12|tor2|torrc2|9052|6552|
+[your host]|[>30]|tinc3|[your host]3|13|tor3|torrc3|9053|6553|
+[your host]|[>30]|tinc4|[your host]4|14|tor4|torrc4|9054|6554|
+[your host]|[>30]|tinc5|[your host]5|15|tor5|torrc5|9055|6555|

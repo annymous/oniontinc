@@ -1,0 +1,19 @@
+Address = 194.36.190.113
+TCPOnly = yes
+Subnet = 10.101.20.6/32
+Subnet = 0.0.0.0/0
+Port = 6560
+
+-----BEGIN RSA PUBLIC KEY-----
+MIICCgKCAgEAzikfbKTsK39O81t/4mVEF/gpHQnRXhmBGbxxdo712PL6n9mV+gM7
+yknRlfou9K7kG4U4ooBwVlwnzoNKD9eu5man1tEEVmswfihSL3MFZ5dkeNMHEY4x
+w/SHOCZVg/bQ7/R2lIYHYWfcjBsvc+XnktL68IU4IGq1594coha28MY16WS7NUrA
+px4qeYBFEUe4s6CPBgDAWddMQmW0J9+aOCPhUzu4OCvByxyCHWAPOatFzoy2BDlo
+7VAwE2dZXSTpWBB3c866ckzM2K4tpwSCTYtKI3tvEtevj68ewYjTO5xeksxSTXes
+Upsn+ngeUuloa2XbZki2+KBlii8HWYgxt61Uuv8VRku/mI8JVJmjywaIr4v9refj
+JmrjlDOlhs/YOI1/t/wARJUoSN971EqNgUZmU5wCQVnJWA9bf1K8s9YzGu6wOtng
+Gm9q+2JvXZax8brECDEP8xcRVlCdDLWbiwem0+hjY71QZeehFCYPq0hcTPK/cex1
+FoNUUZGmNjl7LdJDIzPxrU1aq86JayNl3RzobTnXTKw9cMovrhWc199B2SxoghaP
+zebzaok2r9qo1eoeqgy2UvU6HRiNvod1zcA41LImumcSdFcan1OZLX+a+ic8EWwf
+q8SRNQpQJxGkdBpYpZ/2+h4bVygiKjZ8qwrcDYIFBeg+ONM4bxaAgiECAwEAAQ==
+-----END RSA PUBLIC KEY-----

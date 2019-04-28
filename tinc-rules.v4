@@ -1,0 +1,29 @@
+*filter
+
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT DROP [0:0]
+
+-A INPUT -i lo -s 127.0.0.1/32 -d 127.0.0.1/32 -j ACCEPT
+-A INPUT -s 127.0.0.1/32 -d 127.0.0.1/32 -j ACCEPT
+-A INPUT -m conntrack --ctstate INVALID -j DROP
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -i tinc+ -p icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 22 -m conntrack --ctstate NEW -j ACCEPT
+-A INPUT -i tinc+ -p tcp -m tcp --dport 5201 -m conntrack --ctstate NEW -j ACCEPT
+-A INPUT -i tinc+ -p udp -m udp --dport 5201 -m conntrack --ctstate NEW -j ACCEPT
+-A INPUT -i tinc+ -p tcp -m tcp -m multiport --dports 80,443,8000 -m conntrack --ctstate NEW -j ACCEPT
+-A INPUT -j DROP
+
+-A FORWARD -j DROP
+
+-A OUTPUT -o lo -s 127.0.0.1/32 -d 127.0.0.1/32 -j ACCEPT
+-A OUTPUT -s 127.0.0.1/32 -d 127.0.0.1/32 -j ACCEPT
+-A OUTPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A OUTPUT -o tinc+ -p icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
+-A OUTPUT -o eth0 -m owner --uid-owner 107 -j ACCEPT
+-A OUTPUT -o tinc+ -m owner --uid-owner 107 -j DROP
+-A OUTPUT -o tinc+ -j ACCEPT
+-A OUTPUT -o eth0 -j DROP
+
+COMMIT
